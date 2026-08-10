@@ -1,0 +1,14 @@
+[
+    {
+        "id": 1,
+        "title": "برنامه نویسی پیشرفته",
+        "code": "CS301",
+        "unit": 3,
+        "capacity": 35,
+        "professor_id": 1,
+        "student_ids": [
+            1,
+            3
+        ]
+    }
+]

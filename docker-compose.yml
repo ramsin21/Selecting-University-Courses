@@ -1,0 +1,14 @@
+services:
+
+  backend:
+    build:
+      context: ./backend
+    container_name: course_backend
+
+    ports:
+      - "8000:8000"
+
+    volumes:
+      - ./backend/data:/app/data
+
+    restart: unless-stopped

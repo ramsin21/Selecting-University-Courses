@@ -1,0 +1,12 @@
+[
+    {
+        "id": 1,
+        "first_name": "Armin",
+        "last_name": "Rashno",
+        "personal_code": "12334",
+        "department": "کامپیوتر",
+        "course_ids": [
+            1
+        ]
+    }
+]

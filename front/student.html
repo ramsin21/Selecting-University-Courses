@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>سیستم انتخاب واحد</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+<main class="page">
+
+    <!-- صفحه ورود -->
+    <section class="login-card" id="loginPage">
+
+        <div class="logo">
+            🎓
+        </div>
+
+        <h1>سیستم انتخاب واحد</h1>
+
+        <p class="subtitle">
+            برای ورود به پنل دانشجویی، شماره دانشجویی خود را وارد کنید.
+        </p>
+
+        <form id="loginForm">
+
+            <div class="input-group">
+
+                <label for="studentNumber">
+                    شماره دانشجویی
+                </label>
+
+                <input
+                    type="text"
+                    id="studentNumber"
+                    placeholder="مثلاً 123456789"
+                    autocomplete="off"
+                    required
+                >
+
+            </div>
+
+
+            <button type="submit" class="login-button">
+
+                ورود به پنل
+
+                <span>←</span>
+
+            </button>
+
+        </form>
+
+
+        <p id="message" class="message"></p>
+
+
+        <div class="footer">
+            سیستم مدیریت انتخاب واحد
+        </div>
+
+    </section>
+
+
+
+    <!-- پنل دانشجو -->
+
+    <section class="dashboard" id="dashboardPage">
+
+
+        <!-- Header -->
+
+        <header class="dashboard-header">
+
+            <div>
+
+                <p class="welcome-text">
+                    خوش آمدید 👋
+                </p>
+
+                <h1 id="studentName">
+                    -
+                </h1>
+
+            </div>
+
+
+            <button
+                class="logout-button"
+                onclick="logout()">
+
+                خروج
+
+            </button>
+
+        </header>
+
+
+
+        <!-- اطلاعات دانشجو -->
+
+        <section class="student-info">
+
+
+            <div class="info-item">
+
+                <span class="info-label">
+                    شماره دانشجویی
+                </span>
+
+                <strong id="studentNumberInfo">
+                    -
+                </strong>
+
+            </div>
+
+
+
+            <div class="info-item">
+
+                <span class="info-label">
+                    رشته
+                </span>
+
+                <strong id="studentMajor">
+                    -
+                </strong>
+
+            </div>
+
+
+        </section>
+
+        <div id="toast" class="toast"></div>
+
+        <!-- درس‌های انتخاب شده -->
+
+        <section class="courses-section">
+
+
+            <div class="section-title">
+
+                <div>
+
+                    <h2>
+                        📚 درس‌های من
+                    </h2>
+
+                    <p>
+                        درس‌هایی که در حال حاضر انتخاب کرده‌اید
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div
+                id="selectedCourses"
+                class="courses-list">
+
+                <div class="empty-courses">
+
+                    هنوز درسی انتخاب نکرده‌اید.
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =====================================
+             دروس ارائه شده
+        ====================================== -->
+
+        <section class="courses-section">
+
+
+            <div class="section-title">
+
+                <div>
+
+                    <h2>
+                        📚 دروس ارائه‌شده
+                    </h2>
+
+                    <p>
+                        درس‌های موجود برای انتخاب واحد
+                    </p>
+                    <div class="course-search">
+                            <input
+                                type="text"
+                                id="courseSearch"
+                                placeholder="جستجوی نام یا کد درس..."
+                                autocomplete="off"
+                            >
+                        </div>
+                </div>
+
+            </div>
+
+
+
+            <div
+                id="availableCourses"
+                class="courses-list">
+
+
+                <div class="empty-courses">
+
+                    در حال دریافت درس‌ها...
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+    </section>
+
+
+</main>
+
+
+
+<script src="script.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,218 @@
+
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>پنل استاد | سیستم انتخاب واحد</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <main class="page">
+
+        <!-- ورود استاد -->
+        <section class="login-card professor-login" id="professorLoginPage">
+
+            <div class="logo">
+                👨‍🏫
+            </div>
+
+            <h1>پنل استاد</h1>
+
+            <p class="subtitle">
+                برای ورود به پنل استاد، کد پرسنلی خود را وارد کنید.
+            </p>
+
+            <form id="professorLoginForm">
+
+                <div class="input-group">
+
+                    <label for="professorCode">
+                        کد پرسنلی
+                    </label>
+
+                    <input
+                        type="text"
+                        id="professorCode"
+                        placeholder="مثلاً 12334"
+                        autocomplete="off"
+                        required
+                    >
+
+                </div>
+
+                <button type="submit" class="login-button">
+                    ورود به پنل
+                    <span>←</span>
+                </button>
+
+            </form>
+
+            <p id="professorMessage" class="message"></p>
+
+            <button
+                type="button"
+                class="back-home-button"
+                onclick="location.href='index.html'">
+                ← بازگشت به صفحه اصلی
+            </button>
+
+            <div class="footer">
+                سیستم مدیریت انتخاب واحد
+            </div>
+
+        </section>
+
+
+        <!-- پنل استاد -->
+        <section
+            class="dashboard"
+            id="professorDashboard"
+            style="display: none;">
+
+            <header class="dashboard-header">
+
+                <div>
+                    <p class="welcome-text">
+                        خوش آمدید 👋
+                    </p>
+
+                    <h1 id="professorName">
+                        -
+                    </h1>
+                </div>
+
+                <button
+                    class="logout-button"
+                    onclick="professorLogout()">
+                    خروج
+                </button>
+
+            </header>
+
+
+            <!-- اطلاعات استاد -->
+            <section class="student-info">
+
+                <div class="info-item">
+
+                    <span class="info-label">
+                        کد پرسنلی
+                    </span>
+
+                    <strong id="professorCodeInfo">
+                        -
+                    </strong>
+
+                </div>
+
+                <div class="info-item">
+
+                    <span class="info-label">
+                        گروه آموزشی
+                    </span>
+
+                    <strong id="professorDepartment">
+                        -
+                    </strong>
+
+                </div>
+
+            </section>
+                <section class="courses-section">
+
+                    <div class="section-title">
+                        <div>
+                            <h2>📖 درس‌های قابل انتخاب</h2>
+
+                            <p>
+                                برای اختصاص درس به خود، یکی از درس‌ها را انتخاب کنید.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div
+                        id="availableProfessorCourses"
+                        class="courses-list">
+
+                        <div class="empty-courses">
+                            در حال بارگذاری درس‌ها...
+                        </div>
+
+                    </div>
+
+                </section>
+
+            <!-- درس‌های استاد -->
+            <section class="courses-section">
+
+                <div class="section-title">
+
+                    <div>
+                        <h2>
+                            📚 درس‌های من
+                        </h2>
+
+                        <p>
+                            درس‌هایی که به شما اختصاص داده شده‌اند
+                        </p>
+                    </div>
+
+                </div>
+
+                <div
+                    id="professorCourses"
+                    class="courses-list">
+
+                    <div class="empty-courses">
+                        در حال بارگذاری درس‌ها...
+                    </div>
+
+                </div>
+
+            </section>
+                        <section
+                class="courses-section"
+                id="courseStudentsSection"
+                style="display: none;">
+
+                <div class="section-title">
+
+                    <div>
+                        <h2>👥 دانشجویان درس</h2>
+
+                        <p id="selectedCourseTitle">
+                            -
+                        </p>
+                    </div>
+
+                </div>
+
+                <div
+                    id="courseStudents"
+                    class="courses-list">
+
+                    <div class="empty-courses">
+                        در حال بارگذاری دانشجویان...
+                    </div>
+
+                </div>
+
+            </section>
+
+        </section>
+
+    </main>
+
+    <script src="professor.js"></script>
+
+</body>
+
+</html>
+

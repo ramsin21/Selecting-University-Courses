@@ -1,0 +1,30 @@
+[
+    {
+        "id": 1,
+        "first_name": "Ramsin",
+        "last_name": "Alipoor",
+        "student_number": "123456789",
+        "major": "مهندسی کامپیوتر",
+        "selected_course_ids": [
+            1
+        ]
+    },
+    {
+        "id": 3,
+        "first_name": "Ali",
+        "last_name": "Sohrabi",
+        "student_number": "40411415045",
+        "major": "مهندسی کامپیوتر",
+        "selected_course_ids": [
+            1
+        ]
+    },
+    {
+        "id": 4,
+        "first_name": "Saleh",
+        "last_name": "Karami",
+        "student_number": "40411415058",
+        "major": "مهندسی کامپیوتر",
+        "selected_course_ids": []
+    }
+]
