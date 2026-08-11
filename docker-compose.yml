@@ -2,13 +2,31 @@ services:
 
   backend:
     build:
-      context: ./backend
+      context: .
+      dockerfile: Dockerfile
+
     container_name: course_backend
 
     ports:
       - "8000:8000"
 
     volumes:
-      - ./backend/data:/app/data
+      - ./data/files:/app/data/files
+
+    restart: unless-stopped
+
+
+  frontend:
+    build:
+      context: ./front
+      dockerfile: Dockerfile
+
+    container_name: course_frontend
+
+    ports:
+      - "8080:80"
+
+    depends_on:
+      - backend
 
     restart: unless-stopped

@@ -1,3 +1,9 @@
+const API_URL =
+    window.location.hostname === "localhost" ||
+    window.location.hostname === "127.0.0.1"
+        ? "http://127.0.0.1:8000"
+        : "";
+
 const loginForm = document.getElementById("loginForm");
 
 const message = document.getElementById("message");
@@ -39,8 +45,8 @@ loginForm.addEventListener("submit", async function (event) {
 
     try {
 
-        const response =
-            await fetch("http://127.0.0.1:8000/students/");
+       const response =
+            await fetch(`${API_URL}/students/`);
 
 
         if (!response.ok) {
@@ -132,7 +138,7 @@ async function loadStudentCourses(studentId) {
 
         const response =
             await fetch(
-                `http://127.0.0.1:8000/students/${studentId}/courses`
+                `${API_URL}/students/${studentId}/courses`
             );
 
 
@@ -242,7 +248,7 @@ async function loadAvailableCourses() {
     try {
 
         const response = await fetch(
-            "http://127.0.0.1:8000/courses/"
+            `${API_URL}/courses/`
         );
 
         if (!response.ok) {
@@ -354,7 +360,7 @@ async function selectCourse(courseId) {
     try {
 
         const response = await fetch(
-            `http://127.0.0.1:8000/students/${currentStudent.id}/courses/${courseId}`,
+            `${API_URL}/students/${currentStudent.id}/courses/${courseId}`,
             {
                 method: "POST"
             }
@@ -415,7 +421,7 @@ async function dropCourse(courseId) {
     try {
 
         const response = await fetch(
-            `http://127.0.0.1:8000/students/${currentStudent.id}/courses/${courseId}`,
+            `${API_URL}/students/${currentStudent.id}/courses/${courseId}`,
             {
                 method: "DELETE"
             }

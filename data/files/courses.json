@@ -7,7 +7,6 @@
         "capacity": 35,
         "professor_id": 1,
         "student_ids": [
-            1,
             3
         ]
     }
