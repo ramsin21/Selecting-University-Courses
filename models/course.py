@@ -2,13 +2,14 @@ from exceptions.custom_exceptions import (CourseAlreadySelectedException,
     CourseFullException, CourseNotSelectedException, ProfessorAlreadyAssignedException)
 
 class Courses:
-    def __init__(self, id, title : str, code : int, units, capacity):
-        
+    def __init__(self, id, title : str, code : int, units, capacity, major=None):
+
         self.id = id
         self.title = title
         self.code = code
         self.units = units
         self.capacity = capacity
+        self.major = major
         self.professor = None
         self.students = []
         
@@ -49,6 +50,7 @@ class Courses:
             "code": self.code,
             "units": self.units,
             "capacity": self.capacity,
+            "major": self.major,
             "remaining_capacity" : self.capacity - len(self.students),
             "professor" : None if self.professor is None else {
                 "id" : self.professor.id,

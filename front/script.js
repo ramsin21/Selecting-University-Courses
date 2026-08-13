@@ -506,8 +506,23 @@ if (registerForm) {
 
         if (!registerMessage) return;
 
-        if (!firstName || !lastName || !studentNumber || !major) {
-            registerMessage.textContent = "همه فیلدها الزامی هستند.";
+        if (!firstName) {
+            registerMessage.textContent = "لطفا نام خود را وارد کنید.";
+            registerMessage.style.color = "#f87171";
+            return;
+        }
+        if (!lastName) {
+            registerMessage.textContent = "لطفا نام خانوادگی خود را وارد کنید.";
+            registerMessage.style.color = "#f87171";
+            return;
+        }
+        if (!studentNumber) {
+            registerMessage.textContent = "لطفا شماره دانشجویی خود را وارد کنید.";
+            registerMessage.style.color = "#f87171";
+            return;
+        }
+        if (!major) {
+            registerMessage.textContent = "لطفا رشته تحصیلی خود را وارد کنید.";
             registerMessage.style.color = "#f87171";
             return;
         }

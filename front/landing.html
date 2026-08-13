@@ -11,8 +11,6 @@
 
     <link rel="stylesheet" href="style.css">
 
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-
 </head>
 
 
@@ -36,25 +34,24 @@
 
     <main class="splash-container">
 
-        <!-- title with letter animation -->
+        <!-- title -->
 
-        <h1 class="splash-title" id="splashTitle">
-            سایت انتخاب واحد دانشگاه لرستان
+        <h1 class="splash-title">
+            <span class="title-line">سایت انتخاب واحد</span>
+            <span class="title-line accent">دانشگاه لرستان</span>
         </h1>
 
-        <p class="splash-subtitle">
-            <span class="fade-in" style="animation-delay: 0.5s;">سامانه یکپارچه انتخاب واحد دانشگاه لرستان</span>
 
-            <span class="fade-in" style="animation-delay: 0.7s;">به روزرسانی شده و بهینه شده برای دانشجویان و اساتید</span>
+        <!-- subtitle -->
+
+        <p class="splash-subtitle">
+            سامانه یکپارچه انتخاب واحد دانشگاه لرستان
         </p>
 
 
-        <!-- animated button -->
+        <!-- animated enter button -->
 
-        <button
-            class="splash-button fade-in"
-            style="animation-delay: 0.9s;"
-            id="enterBtn">
+        <button class="splash-button" id="enterBtn">
 
             <span class="btn-text">ورود به سامانه</span>
 
@@ -63,50 +60,17 @@
         </button>
 
 
-        <!-- decorative corner badges -->
+        <!-- decorative elements -->
 
-        <div class="splash-decor" style="--pos: top-left;">
-            <span>📚</span>
-        </div>
-
-        <div class="splash-decor" style="--pos: top-right;">
-            <span>🎓</span>
-        </div>
-
-        <div class="splash-decor" style="--pos: bottom-left;">
-            <span>👨‍🏫</span>
-        </div>
-
-        <div class="splash-decor" style="--pos: bottom-right;">
-            <span>🎓</span>
-        </div>
+        <div class="accent-dot top-left">🎓</div>
+        <div class="accent-dot top-right">📚</div>
+        <div class="accent-dot bottom-left">👨‍🏫</div>
+        <div class="accent-dot bottom-right">🎓</div>
 
     </main>
 
 
     <script>
-
-        // letter by letter reveal for the title
-
-        const titleEl = document.getElementById("splashTitle");
-
-        const text = titleEl.textContent.trim();
-
-        titleEl.innerHTML = "";
-
-
-        [...text].forEach((char, i) => {
-
-            const span = document.createElement("span");
-
-            span.textContent = char;
-
-            span.style.animationDelay = `${i * 0.06}s`;
-
-            titleEl.appendChild(span);
-
-        });
-
 
         // click to enter the role-selection page
 
