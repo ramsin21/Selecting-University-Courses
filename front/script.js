@@ -14,8 +14,8 @@ const dashboardPage = document.getElementById("dashboardPage");
 let currentStudent = null;
 
 
-
-loginForm.addEventListener("submit", async function (event) {
+if (loginForm) {
+    loginForm.addEventListener("submit", async function (event) {
 
     event.preventDefault();
 
@@ -98,6 +98,7 @@ loginForm.addEventListener("submit", async function (event) {
 
 });
 
+}
 
 
 function showDashboard(student) {
@@ -452,7 +453,8 @@ async function dropCourse(courseId) {
         alert("ارتباط با سرور برقرار نشد.");
     }
 }
-document.getElementById("courseSearch").addEventListener("input", function () {
+if (document.getElementById("courseSearch")) {
+    document.getElementById("courseSearch").addEventListener("input", function () {
 
     const searchText = this.value.trim().toLowerCase();
 
@@ -473,17 +475,7 @@ document.getElementById("courseSearch").addEventListener("input", function () {
     });
 
 });
-function showToast(message) {
 
-    const toast = document.getElementById("toast");
-
-    toast.textContent = message;
-
-    toast.classList.add("show");
-
-    setTimeout(() => {
-        toast.classList.remove("show");
-    }, 2500);
 }
 
 
