@@ -4,16 +4,37 @@ from schemas.course_schema import CourseCreate, CourseUpdate
 from exceptions.custom_exceptions import (CourseNotFoundException, InvalidDataException)
 
 
+def _generate_course_code(title: str) -> str:
+    """Generate a unique course code from title initials + next available number."""
+    base = "".join(word[0].upper() for word in title.strip().split() if word)
+    if len(base) > 4:
+        base = base[:4]
+    elif len(base) < 2:
+        base = "CR"
+
+    existing_codes = {course.code for course in courses.values()}
+    for suffix in range(1, 1000):
+        code = f"{base}{suffix:03d}"
+        if code not in existing_codes:
+            return code
+    raise InvalidDataException("ناتوان در تولید کد منحصربفرد برای درس")
+
+
 def create_course(course_data: CourseCreate) -> Courses:
-    if any(course.code == course_data.code for course in courses.values()):
+    code = course_data.code
+    if not code:
+        code = _generate_course_code(course_data.title)
+
+    if any(course.code == code for course in courses.values()):
         raise InvalidDataException("کد درس تکراری است")
 
     course = Courses(
         id = get_next_course_id(),
         title = course_data.title,
-        code = course_data.code,
+        code = code,
         units = course_data.units,
         capacity = course_data.capacity,
+        major = getattr(course_data, "major", None),
     )
     courses[course.id] = course
     save_all()
@@ -60,13 +81,13 @@ def delete_course(course_id: int) -> None:
     course = get_course_by_id(course_id)
 
     #remove this course from all students
-    for student in list(courses.students):
-        if courses in student.selected_courses:
+    for student in list(course.students):
+        if course in student.selected_courses:
             student.selected_courses.remove(course)
 
     #remove this course from professor
-    if courses.professor is not None and courses in courses.professor.courses:
-        courses.professor.courses.remove(course)
+    if course.professor is not None and course in course.professor.courses:
+        course.professor.courses.remove(course)
 
     del courses[course_id]
     save_all()

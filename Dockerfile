@@ -11,6 +11,10 @@ WORKDIR /app
 # Install build dependencies only
 RUN apt-get update && apt-get install -y --no-install-recommends \
     gcc \
+<<<<<<< HEAD
+=======
+    curl \
+>>>>>>> claude/relaxed-taussig-870205
     && rm -rf /var/lib/apt/lists/*
 
 # Copy requirements first for better layer caching

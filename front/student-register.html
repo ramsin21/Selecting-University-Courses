@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ثبت نام جدید - سیستم انتخاب واحد</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+    <main class="page">
+
+        <section class="login-card">
+
+            <div class="logo">
+                🎓
+            </div>
+
+            <h1>ثبت نام دانشجو</h1>
+
+            <p class="subtitle">
+                برای شروع انتخاب واحد، شماره دانشجویی خود را وارد کنید.
+            </p>
+
+
+            <form id="registerForm">
+
+                <div class="input-group">
+
+                    <label for="firstName">
+                        نام
+                    </label>
+
+                    <input
+                        type="text"
+                        id="firstName"
+                        placeholder="مثلاً محمد"
+                        autocomplete="off"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label for="lastName">
+                        نام خانوادگی
+                    </label>
+
+                    <input
+                        type="text"
+                        id="lastName"
+                        placeholder="مثلاً احمدی"
+                        autocomplete="off"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label for="studentNumber">
+                        شماره دانشجویی
+                    </label>
+
+                    <input
+                        type="text"
+                        id="studentNumber"
+                        placeholder="مثلاً 123456789"
+                        autocomplete="off"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label for="major">
+                        رشته
+                    </label>
+
+                    <input
+                        type="text"
+                        id="major"
+                        placeholder="مثلاً مهندسی کامیوتر"
+                        autocomplete="off"
+                        required
+                    >
+
+                </div>
+
+
+                <button type="submit" class="login-button">
+
+                    ثبت نام
+                    <span>←</span>
+
+                </button>
+
+
+                <p id="registerMessage" class="message"></p>
+
+
+            </form>
+
+
+            <button
+                class="back-home-button"
+                onclick="location.href='index.html'">
+
+                ← بازگشت به صفحه اصلی
+
+            </button>
+
+
+            <div class="footer">
+                سیستم مدیریت انتخاب واحد
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+
+</html>

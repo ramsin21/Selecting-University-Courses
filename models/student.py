@@ -53,7 +53,7 @@ class Student(Person):
                     "id" : course.id,
                     "title" : course.title,
                     "code" : course.code,
-                    "unit" : course.units
+                    "units" : course.units
                 }
                 for course in self.selected_courses
             ]

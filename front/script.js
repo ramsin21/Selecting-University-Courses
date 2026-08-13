@@ -5,13 +5,11 @@ const API_URL =
         : "";
 
 const loginForm = document.getElementById("loginForm");
-
+const registerForm = document.getElementById("registerForm");
 const message = document.getElementById("message");
-
+const registerMessage = document.getElementById("registerMessage");
 const loginPage = document.getElementById("loginPage");
-
 const dashboardPage = document.getElementById("dashboardPage");
-
 
 let currentStudent = null;
 
@@ -188,7 +186,7 @@ async function loadStudentCourses(studentId) {
 
             <div class="course-details">
                 <span>کد: ${course.code}</span>
-                <span>${course.unit} واحد</span>
+                <span>${course.units} واحد</span>
             </div>
         </div>
 
@@ -486,4 +484,113 @@ function showToast(message) {
     setTimeout(() => {
         toast.classList.remove("show");
     }, 2500);
+}
+
+
+// ============================
+// Student self-registration
+// ============================
+
+if (registerForm) {
+    registerForm.addEventListener("submit", async function (event) {
+        event.preventDefault();
+
+        const firstName =
+            document.getElementById("firstName").value.trim();
+        const lastName =
+            document.getElementById("lastName").value.trim();
+        const studentNumber =
+            document.getElementById("studentNumber").value.trim();
+        const major =
+            document.getElementById("major").value.trim();
+
+        if (!registerMessage) return;
+
+        if (!firstName) {
+            registerMessage.textContent = "لطفا نام خود را وارد کنید.";
+            registerMessage.style.color = "#f87171";
+            return;
+        }
+        if (!lastName) {
+            registerMessage.textContent = "لطفا نام خانوادگی خود را وارد کنید.";
+            registerMessage.style.color = "#f87171";
+            return;
+        }
+        if (!studentNumber) {
+            registerMessage.textContent = "لطفا شماره دانشجویی خود را وارد کنید.";
+            registerMessage.style.color = "#f87171";
+            return;
+        }
+        if (!major) {
+            registerMessage.textContent = "لطفا رشته تحصیلی خود را وارد کنید.";
+            registerMessage.style.color = "#f87171";
+            return;
+        }
+
+        registerMessage.textContent = "در حال ثبت نام...";
+        registerMessage.style.color = "#94a3b8";
+
+        const submitBtn = registerForm.querySelector("button");
+        submitBtn.disabled = true;
+
+        try {
+            const existingResponse = await fetch(`${API_URL}/students/`);
+
+            if (existingResponse.ok) {
+                const existingStudents = await existingResponse.json();
+                const alreadyExists = existingStudents.some(
+                    s => s.student_number === studentNumber
+                );
+
+                if (alreadyExists) {
+                    registerMessage.textContent =
+                        "این شماره دانشجویی قبلا ثبت شده است. وارد شوید.";
+                    registerMessage.style.color = "#f87171";
+                    submitBtn.disabled = false;
+                    return;
+                }
+            }
+
+            const response = await fetch(`${API_URL}/students/`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    first_name: firstName,
+                    last_name: lastName,
+                    student_number: studentNumber,
+                    major: major
+                })
+            });
+
+            const result = await response.json();
+
+            if (!response.ok) {
+                const errorMessage =
+                    result.message ||
+                    result.Message ||
+                    result.detail ||
+                    "ثبت نام انجام نشد.";
+                registerMessage.textContent = errorMessage;
+                registerMessage.style.color = "#f87171";
+                submitBtn.disabled = false;
+                return;
+            }
+
+            registerMessage.textContent =
+                "ثبت نام موفق! حالا می‌توانید وارد شوید.";
+            registerMessage.style.color = "#4ade80";
+
+            setTimeout(() => {
+                window.location.href = "student.html";
+            }, 1500);
+
+        } catch (error) {
+            console.error("Registration error:", error);
+            registerMessage.textContent = "خطا در ارتباط با سرور.";
+            registerMessage.style.color = "#f87171";
+            submitBtn.disabled = false;
+        }
+    });
 }

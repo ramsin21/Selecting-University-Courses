@@ -65,7 +65,7 @@ FRONT_DIR = BASE_DIR / "front"
 
 @app.get("/", include_in_schema=False)
 def root():
-    return FileResponse(FRONT_DIR / "index.html")
+    return FileResponse(FRONT_DIR / "landing.html")
 
 
 app.mount(
@@ -102,7 +102,7 @@ async def student_not_found_handler(
     return JSONResponse(
         status_code=status.HTTP_404_NOT_FOUND,
         content={
-            "Error": "دانشجو پیدا نشد",
+            "error": "دانشجو پیدا نشد",
             "message": str(exc)
         },
     )
@@ -165,6 +165,20 @@ async def course_full_exception_handler(
 
 
 @app.exception_handler(CourseAlreadySelectedException)
+async def course_already_selected_handler(
+    request: Request,
+    exc: CourseAlreadySelectedException
+):
+    return JSONResponse(
+        status_code=status.HTTP_409_CONFLICT,
+        content={
+            "error": "CourseAlreadySelected",
+            "message": str(exc)
+        },
+    )
+
+
+@app.exception_handler(CourseAlreadySelectedException)
 async def course_already_selected_exception_handler(
     request: Request,
     exc: CourseAlreadySelectedException
@@ -220,15 +234,3 @@ async def course_selection_exception_handler(
     )
 
 
-@app.exception_handler(CourseNotSelectedException)
-async def course_not_selected_handler(
-    request: Request,
-    exc: CourseNotSelectedException
-):
-    return JSONResponse(
-        status_code=status.HTTP_409_CONFLICT,
-        content={
-            "error": "CourseNotSelected",
-            "message": str(exc)
-        },
-    )

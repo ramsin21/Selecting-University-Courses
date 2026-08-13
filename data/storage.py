@@ -181,6 +181,8 @@ def save_all() -> None:
 
             "capacity": course.capacity,
 
+            "major": course.major,
+
             # اصلاح اصلی این قسمت
             "professor_id":
                 None
@@ -359,6 +361,8 @@ def load_all() -> None:
             units=int(item["unit"]),
 
             capacity=int(item["capacity"]),
+
+            major=item.get("major"),
 
         )
 

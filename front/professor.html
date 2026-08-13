@@ -135,6 +135,12 @@
                                 برای اختصاص درس به خود، یکی از درس‌ها را انتخاب کنید.
                             </p>
                         </div>
+
+                        <button
+                            class="create-course-button"
+                            onclick="openCreateCourseModal()">
+                            + ایجاد درس جدید
+                        </button>
                     </div>
 
                     <div
@@ -209,6 +215,112 @@
         </section>
 
     </main>
+
+
+    <!-- Create Course Modal -->
+
+    <div class="modal-overlay" id="createCourseModal">
+
+        <div class="modal">
+
+            <div class="modal-header">
+
+                <h3>📚 ایجاد درس جدید</h3>
+
+                <button class="modal-close" onclick="closeCreateCourseModal()">×</button>
+
+            </div>
+
+
+            <div class="modal-body">
+
+                <div class="input-group">
+
+                    <label for="courseTitle">
+                        نام درس
+                    </label>
+
+                    <input
+                        type="text"
+                        id="courseTitle"
+                        placeholder="مثلاً برنامه نویسی پیشرفته"
+                        autocomplete="off"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label for="courseCapacity">
+                        ظرفیت
+                    </label>
+
+                    <input
+                        type="number"
+                        id="courseCapacity"
+                        placeholder="مثلاً 35"
+                        min="1"
+                        max="200"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label for="courseUnits">
+                        تعداد واحد
+                    </label>
+
+                    <select id="courseUnits">
+                        <option value="1">1 واحد</option>
+                        <option value="2">2 واحد</option>
+                        <option value="3" selected>3 واحد</option>
+                        <option value="4">4 واحد</option>
+                    </select>
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label for="courseMajor">
+                        رشته ارائه
+                    </label>
+
+                    <input
+                        type="text"
+                        id="courseMajor"
+                        placeholder="مثلاً مهندسی کامیوتر (خالی بگذارید برای همه)"
+                        autocomplete="off"
+                    >
+
+                </div>
+
+
+                <p id="createCourseMessage" class="message"></p>
+
+            </div>
+
+
+            <div class="modal-footer">
+
+                <button class="cancel-button" onclick="closeCreateCourseModal()">
+                    انصراف
+                </button>
+
+                <button class="login-button" onclick="createCourse()">
+                    ایجاد درس
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
 
     <script src="professor.js"></script>
 
