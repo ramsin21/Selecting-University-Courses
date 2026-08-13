@@ -5,7 +5,9 @@
         "last_name": "Alipoor",
         "student_number": "123456789",
         "major": "مهندسی کامپیوتر",
-        "selected_course_ids": []
+        "selected_course_ids": [
+            1
+        ]
     },
     {
         "id": 3,

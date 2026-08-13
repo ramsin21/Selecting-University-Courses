@@ -1,32 +1,63 @@
-services:
+# ==========================================
+# Docker Compose - Course Selection System
+# ==========================================
 
+version: '3.8'
+
+services:
+  # ----------------------------------------
+  # Backend API Service (FastAPI)
+  # ----------------------------------------
   backend:
     build:
       context: .
       dockerfile: Dockerfile
-
     container_name: course_backend
-
     ports:
       - "8000:8000"
-
     volumes:
+      # Persist JSON data files
       - ./data/files:/app/data/files
-
+    environment:
+      - PYTHONUNBUFFERED=1
+      - PYTHONDONTWRITEBYTECODE=1
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/debug/storage"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    networks:
+      - course_network
 
-
+  # ----------------------------------------
+  # Frontend Service (Nginx)
+  # ----------------------------------------
   frontend:
     build:
       context: ./front
       dockerfile: Dockerfile
-
     container_name: course_frontend
-
     ports:
       - "8080:80"
-
     depends_on:
-      - backend
-
+      backend:
+        condition: service_healthy
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost/"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+    networks:
+      - course_network
+
+# ----------------------------------------
+# Networks
+# ----------------------------------------
+networks:
+  course_network:
+    driver: bridge
+    name: course_network
