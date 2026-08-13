@@ -98,7 +98,6 @@ document
     });
 
 
-
 // ============================
 // نمایش تمام درس‌ها
 // ============================
@@ -181,7 +180,6 @@ async function loadAvailableProfessorCourses() {
 
                     </div>
 
-
                     <button
                         class="assign-course-button"
                         onclick="assignCourse(${course.id})"
@@ -220,7 +218,6 @@ async function loadAvailableProfessorCourses() {
     }
 
 }
-
 
 
 // ============================
@@ -279,6 +276,7 @@ function loadProfessorCourses(professor) {
                     </span>
 
                 </div>
+
                 <button
                     class="view-students-button"
                     onclick="viewCourseStudents(${course.id})">
@@ -295,7 +293,6 @@ function loadProfessorCourses(professor) {
     });
 
 }
-
 
 
 // ============================
@@ -382,6 +379,8 @@ async function assignCourse(courseId) {
     }
 
 }
+
+
 async function viewCourseStudents(courseId) {
 
     const section =
@@ -507,6 +506,7 @@ async function viewCourseStudents(courseId) {
 
 }
 
+
 // ============================
 // خروج استاد
 // ============================
@@ -535,134 +535,8 @@ function professorLogout() {
         "professorMessage"
     ).textContent = "";
 
-}
 
-
-// ============================
-// ایجاد درس جدید
-// ============================
-
-function openCreateCourseModal() {
-
-    document.getElementById("createCourseModal").style.display = "flex";
+    // Redirect to landing page
+    window.location.href = "landing.html";
 
 }
-
-
-function closeCreateCourseModal() {
-
-    document.getElementById("createCourseModal").style.display = "none";
-
-    document.getElementById("createCourseMessage").textContent = "";
-
-}
-
-
-async function createCourse() {
-
-    const title = document.getElementById("courseTitle").value.trim();
-    const capacity = document.getElementById("courseCapacity").value;
-    const units = document.getElementById("courseUnits").value;
-    const major = document.getElementById("courseMajor").value.trim();
-
-
-    const messageEl = document.getElementById("createCourseMessage");
-
-
-    if (!title || !capacity) {
-
-        messageEl.textContent = "نام درس و ظرفیت الزامی هستند.";
-
-        messageEl.style.color = "#f87171";
-
-        return;
-
-    }
-
-
-    messageEl.textContent = "در حال ایجاد...";
-
-    messageEl.style.color = "#94a3b8";
-
-
-    try {
-
-        const response = await fetch(`${API_URL}/courses/`, {
-
-            method: "POST",
-
-            headers: {
-
-                "Content-Type": "application/json"
-
-            },
-
-            body: JSON.stringify({
-
-                title: title,
-
-                capacity: parseInt(capacity),
-
-                units: parseInt(units),
-
-                major: major || null
-
-            })
-
-        });
-
-        const result = await response.json();
-
-
-        if (!response.ok) {
-
-            const errorMessage =
-
-                result.message || result.Message || result.detail || "درس ایجاد نشد.";
-
-            messageEl.textContent = errorMessage;
-
-            messageEl.style.color = "#f87171";
-
-            return;
-
-        }
-
-
-        messageEl.textContent = "درس با موفقیت ایجاد شد!";
-
-        messageEl.style.color = "#4ade80";
-
-        setTimeout(() => {
-
-            closeCreateCourseModal();
-
-            loadAvailableProfessorCourses();
-
-        }, 1500);
-
-
-    } catch (error) {
-
-        console.error("ERROR:", error);
-
-        messageEl.textContent = "ارتباط با سرور برقرر نشد.";
-
-        messageEl.style.color = "#f87171";
-
-    }
-
-}
-
-
-// بستن Modal با کلیک کردن بیرون از آن
-
-document.getElementById("createCourseModal").addEventListener("click", function(e) {
-
-    if (e.target === this) {
-
-        closeCreateCourseModal();
-
-    }
-
-});

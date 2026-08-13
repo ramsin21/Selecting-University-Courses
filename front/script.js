@@ -504,34 +504,26 @@ if (registerForm) {
         const major =
             document.getElementById("major").value.trim();
 
-        if (!registerMessage) return;
-
         if (!firstName) {
-            registerMessage.textContent = "لطفا نام خود را وارد کنید.";
-            registerMessage.style.color = "#f87171";
+            showToast("لطفا نام خود را وارد کنید.", true);
             return;
         }
         if (!lastName) {
-            registerMessage.textContent = "لطفا نام خانوادگی خود را وارد کنید.";
-            registerMessage.style.color = "#f87171";
+            showToast("لطفا نام خانوادگی خود را وارد کنید.", true);
             return;
         }
         if (!studentNumber) {
-            registerMessage.textContent = "لطفا شماره دانشجویی خود را وارد کنید.";
-            registerMessage.style.color = "#f87171";
+            showToast("لطفا شماره دانشجویی خود را وارد کنید.", true);
             return;
         }
         if (!major) {
-            registerMessage.textContent = "لطفا رشته تحصیلی خود را وارد کنید.";
-            registerMessage.style.color = "#f87171";
+            showToast("لطفا رشته تحصیلی خود را وارد کنید.", true);
             return;
         }
 
-        registerMessage.textContent = "در حال ثبت نام...";
-        registerMessage.style.color = "#94a3b8";
-
         const submitBtn = registerForm.querySelector("button");
         submitBtn.disabled = true;
+        submitBtn.textContent = "در حال ثبت نام...";
 
         try {
             const existingResponse = await fetch(`${API_URL}/students/`);
@@ -543,10 +535,9 @@ if (registerForm) {
                 );
 
                 if (alreadyExists) {
-                    registerMessage.textContent =
-                        "این شماره دانشجویی قبلا ثبت شده است. وارد شوید.";
-                    registerMessage.style.color = "#f87171";
+                    showToast("این شماره دانشجویی قبلا ثبت شده است. وارد شوید.", true);
                     submitBtn.disabled = false;
+                    submitBtn.textContent = "ثبت نام";
                     return;
                 }
             }
@@ -572,25 +563,160 @@ if (registerForm) {
                     result.Message ||
                     result.detail ||
                     "ثبت نام انجام نشد.";
-                registerMessage.textContent = errorMessage;
-                registerMessage.style.color = "#f87171";
+                showToast(errorMessage, true);
                 submitBtn.disabled = false;
+                submitBtn.textContent = "ثبت نام";
                 return;
             }
 
-            registerMessage.textContent =
-                "ثبت نام موفق! حالا می‌توانید وارد شوید.";
-            registerMessage.style.color = "#4ade80";
+            showToast("✓ ثبت نام موفق! در حال انتقال به صفحه ورود...");
 
             setTimeout(() => {
                 window.location.href = "student.html";
-            }, 1500);
+            }, 2000);
 
         } catch (error) {
             console.error("Registration error:", error);
-            registerMessage.textContent = "خطا در ارتباط با سرور.";
-            registerMessage.style.color = "#f87171";
+            showToast("خطا در ارتباط با سرور.", true);
             submitBtn.disabled = false;
+            submitBtn.textContent = "ثبت نام";
         }
     });
+}
+
+
+// ============================
+// Professor course creation (on dedicated page)
+// ============================
+
+const createCourseForm = document.getElementById("createCourseForm");
+
+if (createCourseForm) {
+    createCourseForm.addEventListener("submit", async function (event) {
+        event.preventDefault();
+
+        const title = document.getElementById("courseTitle").value.trim();
+        const capacity = document.getElementById("courseCapacity").value;
+        const units = document.getElementById("courseUnits").value;
+        const major = document.getElementById("courseMajor").value.trim();
+
+        if (!title) {
+            showToast("نام درس الزامی است.", true);
+            return;
+        }
+        if (!capacity) {
+            showToast("ظرفیت الزامی است.", true);
+            return;
+        }
+
+        const submitBtn = createCourseForm.querySelector("button");
+        submitBtn.disabled = true;
+        submitBtn.textContent = "در حال ایجاد...";
+
+        try {
+            // Step 1: Create the course
+            const response = await fetch(`${API_URL}/courses/`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    title: title,
+                    capacity: parseInt(capacity),
+                    units: parseInt(units),
+                    major: major || null
+                })
+            });
+
+            const result = await response.json();
+
+            if (!response.ok) {
+                const errorMessage =
+                    result.message ||
+                    result.Message ||
+                    result.detail ||
+                    "درس ایجاد نشد.";
+                showToast(errorMessage, true);
+                submitBtn.disabled = false;
+                submitBtn.textContent = "ایجاد درس";
+                return;
+            }
+
+            const courseId = result.id;
+            if (!courseId) {
+                showToast("دریافت شناسه درس با خطا مواجه شد.", true);
+                submitBtn.disabled = false;
+                submitBtn.textContent = "ایجاد درس";
+                return;
+            }
+
+            // Step 2: Assign the course to the current professor
+            const professorId = getUrlParameter("professor_id");
+            if (professorId) {
+                const assignResponse = await fetch(`${API_URL}/courses/${courseId}/professors/${professorId}`, {
+                    method: "POST"
+                });
+
+                const assignResult = await assignResponse.json();
+
+                if (!assignResponse.ok) {
+                    const errorMessage =
+                        assignResult.message ||
+                        assignResult.Message ||
+                        assignResult.detail ||
+                        "درس ایجاد شد اما اختصاص به استاد انجام نشد.";
+                    showToast(errorMessage, true);
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = "ایجاد درس";
+                    return;
+                }
+            }
+
+            showToast("✓ درس با موفقیت ایجاد و به شما اختصاص داده شد!");
+
+            setTimeout(() => {
+                window.location.href = "professor.html";
+            }, 2000);
+
+        } catch (error) {
+            console.error("Course creation error:", error);
+            showToast("خطا در ارتباط با سرور.", true);
+            submitBtn.disabled = false;
+            submitBtn.textContent = "ایجاد درس";
+        }
+    });
+}
+
+
+// ============================
+// Get URL parameter
+// ============================
+
+function getUrlParameter(name) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(name);
+}
+
+// ============================
+// Toast helper (supports optional error param)
+// ============================
+
+function showToast(message, isError = false) {
+    const toast = document.getElementById("toast");
+    if (!toast) return;
+
+    toast.textContent = message;
+    toast.classList.add("show");
+
+    if (isError) {
+        toast.style.background = "#7f1d1d";
+        toast.style.borderColor = "#dc2626";
+    } else {
+        toast.style.background = "#14532d";
+        toast.style.borderColor = "#16a34a";
+    }
+
+    setTimeout(() => {
+        toast.classList.remove("show");
+    }, 3000);
 }

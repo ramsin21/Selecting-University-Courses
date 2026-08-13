@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ایجاد درس جدید | سیستم انتخاب واحد</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+    <main class="page">
+
+        <!-- Course creation form -->
+        <section class="login-card">
+
+            <div class="logo">
+                📚
+            </div>
+
+            <h1>ایجاد درس جدید</h1>
+
+            <p class="subtitle">
+                اطلاعات درس مورد نظر را وارد کنید تا به دانشجویان ارائه شود.
+            </p>
+
+
+            <form id="createCourseForm">
+
+                <div class="input-group">
+
+                    <label for="courseTitle">
+                        نام درس
+                    </label>
+
+                    <input
+                        type="text"
+                        id="courseTitle"
+                        placeholder="مثلاً برنامه نویسی پیشرفته"
+                        autocomplete="off"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label for="courseCapacity">
+                        ظرفیت
+                    </label>
+
+                    <input
+                        type="number"
+                        id="courseCapacity"
+                        placeholder="مثلاً 35"
+                        min="1"
+                        max="200"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label for="courseUnits">
+                        تعداد واحد
+                    </label>
+
+                    <select id="courseUnits">
+                        <option value="1">1 واحد</option>
+                        <option value="2">2 واحد</option>
+                        <option value="3" selected>3 واحد</option>
+                        <option value="4">4 واحد</option>
+                    </select>
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label for="courseMajor">
+                        رشته ارائه (اختیاری)
+                    </label>
+
+                    <input
+                        type="text"
+                        id="courseMajor"
+                        placeholder="مثلاً مهندسی کامیوتر (خالی بگذارید برای همه رشته‌ها)"
+                        autocomplete="off"
+                    >
+
+                </div>
+
+
+                <p id="createCourseMessage" class="message"></p>
+
+
+                <button type="submit" class="login-button">
+                    ایجاد درس
+                    <span>←</span>
+                </button>
+
+            </form>
+
+
+            <button
+                type="button"
+                class="back-home-button"
+                onclick="location.href='professor.html'">
+                ← بازگشت به پنل استاد
+            </button>
+
+            <div class="footer">
+                سیستم مدیریت انتخاب واحد
+            </div>
+
+        </section>
+
+    </main>
+
+    <div id="toast" class="toast"></div>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+
+</html>

@@ -5,6 +5,7 @@
         "code": "CS301",
         "unit": 3,
         "capacity": 35,
+        "major": null,
         "professor_id": 1,
         "student_ids": [
             3,

@@ -26,5 +26,13 @@
         "student_number": "40411415058",
         "major": "مهندسی کامپیوتر",
         "selected_course_ids": []
+    },
+    {
+        "id": 5,
+        "first_name": "Test",
+        "last_name": "Tester",
+        "student_number": "999",
+        "major": "Test",
+        "selected_course_ids": []
     }
 ]
