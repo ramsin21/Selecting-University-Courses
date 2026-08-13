@@ -45,7 +45,7 @@ def update_professor(professor_id : int, professor_data: ProfessorUpdate) -> Pro
     if professor_data.last_name is not None:
         professor.last_name = professor_data.last_name
     if professor_data.department is not None:
-        professor_data.department = professor_data.department
+        professor.department = professor_data.department
 
     save_all()
     return professor

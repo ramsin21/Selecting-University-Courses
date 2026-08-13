@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>سیستم انتخاب واحد دانشگاه لرستان</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
+</head>
+
+
+<body>
+
+    <div class="splash-bg">
+
+        <!-- floating particles -->
+
+        <div class="particle" style="--duration: 14s; --amp: 120px; --size: 6px; top: 20%; left: 10%;"></div>
+        <div class="particle" style="--duration: 12s; --amp: 140px; --size: 8px; top: 15%; left: 70%;"></div>
+        <div class="particle" style="--duration: 16s; --amp: 100px; --size: 5px; top: 80%; left: 50%;"></div>
+        <div class="particle" style="--duration: 9s; --amp: 160px; --size: 9px; top: 60%; left: 85%;"></div>
+        <div class="particle" style="--duration: 13s; --amp: 80px; --size: 7px; top: 45%; left: 25%;"></div>
+        <div class="particle" style="--duration: 18s; --amp: 180px; --size: 4px; top: 30%; left: 90%;"></div>
+        <div class="particle" style="--duration: 11s; --amp: 130px; --size: 6px; top: 70%; left: 15%;"></div>
+        <div class="particle" style="--duration: 15s; --amp: 110px; --size: 5px; top: 90%; left: 60%;"></div>
+
+    </div>
+
+
+    <main class="splash-container">
+
+        <!-- title with letter animation -->
+
+        <h1 class="splash-title" id="splashTitle">
+            سایت انتخاب واحد دانشگاه لرستان
+        </h1>
+
+        <p class="splash-subtitle">
+            <span class="fade-in" style="animation-delay: 0.5s;">سامانه یکپارچه انتخاب واحد دانشگاه لرستان</span>
+
+            <span class="fade-in" style="animation-delay: 0.7s;">به روزرسانی شده و بهینه شده برای دانشجویان و اساتید</span>
+        </p>
+
+
+        <!-- animated button -->
+
+        <button
+            class="splash-button fade-in"
+            style="animation-delay: 0.9s;"
+            id="enterBtn">
+
+            <span class="btn-text">ورود به سامانه</span>
+
+            <span class="btn-arrow">←</span>
+
+        </button>
+
+
+        <!-- decorative corner badges -->
+
+        <div class="splash-decor" style="--pos: top-left;">
+            <span>📚</span>
+        </div>
+
+        <div class="splash-decor" style="--pos: top-right;">
+            <span>🎓</span>
+        </div>
+
+        <div class="splash-decor" style="--pos: bottom-left;">
+            <span>👨‍🏫</span>
+        </div>
+
+        <div class="splash-decor" style="--pos: bottom-right;">
+            <span>🎓</span>
+        </div>
+
+    </main>
+
+
+    <script>
+
+        // letter by letter reveal for the title
+
+        const titleEl = document.getElementById("splashTitle");
+
+        const text = titleEl.textContent.trim();
+
+        titleEl.innerHTML = "";
+
+
+        [...text].forEach((char, i) => {
+
+            const span = document.createElement("span");
+
+            span.textContent = char;
+
+            span.style.animationDelay = `${i * 0.06}s`;
+
+            titleEl.appendChild(span);
+
+        });
+
+
+        // click to enter the role-selection page
+
+        document.getElementById("enterBtn").addEventListener("click", () => {
+
+            window.location.href = "index.html";
+
+        });
+
+    </script>
+
+</body>
+
+</html>

@@ -60,13 +60,13 @@ def delete_course(course_id: int) -> None:
     course = get_course_by_id(course_id)
 
     #remove this course from all students
-    for student in list(courses.students):
-        if courses in student.selected_courses:
+    for student in list(course.students):
+        if course in student.selected_courses:
             student.selected_courses.remove(course)
 
     #remove this course from professor
-    if courses.professor is not None and courses in courses.professor.courses:
-        courses.professor.courses.remove(course)
+    if course.professor is not None and course in course.professor.courses:
+        course.professor.courses.remove(course)
 
     del courses[course_id]
     save_all()

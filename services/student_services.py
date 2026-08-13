@@ -50,6 +50,8 @@ def update_student(student_id : int, student_data: StudentUpdate) -> Student:
 
 def delete_student(student_id: int) -> None:
     student = students.get(student_id)
+    if student is None:
+        raise StudentNotFoundException("دانشجو پیدا نشد")
 
     for course in list(student.selected_courses):
         student.drop_course(course)
